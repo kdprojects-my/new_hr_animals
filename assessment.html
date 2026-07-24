@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HireDepth — Professional Style Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --bg-2: #DDE6F4; --bg-3: #C5D4EC;
+      --navy: #071220; --navy-mid: #122850;
+      --slate: #4A6FA5; --slate-light: #6B8FBF;
+      --slate-dim: rgba(74,111,165,0.08); --slate-glow: rgba(74,111,165,0.12);
+      --gold: #F0A500;
+      --text: #071220; --text-muted: #1A3050; --text-faint: #3A5070;
+      --border: #C8D4E8; --border-teal: rgba(74,111,165,0.18);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 8px; --max-w: 720px;
+      --shadow-sm: 0 1px 3px rgba(15,31,61,0.08);
+      --shadow-md: 0 4px 16px rgba(15,31,61,0.1);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 400; line-height: 1.7; min-height: 100vh; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(15,31,61,0.06); }
+    .logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; color: var(--navy); text-decoration: none; letter-spacing: -0.02em; }
+    .logo-dot { color: var(--slate); }
+    .nav-back { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+    .nav-back:hover { color: var(--slate); }
+
+    .page { max-width: var(--max-w); margin: 0 auto; padding: 7rem 1.5rem 5rem; }
+
+    /* INTRO */
+    .intro { text-align: center; margin-bottom: 3rem; }
+    .intro-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 1.25rem;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--slate-dim); padding: 0.35rem 1rem;
+      border-radius: 6px; border: 1px solid var(--border-slate);
+    }
+    .intro h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; color: var(--navy); }
+    .intro h1 em { font-style: italic; color: var(--slate); }
+    .intro p { font-size: 0.95rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+    .intro-note { margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--slate-dim); border: 1px solid var(--border-slate); border-radius: var(--radius); font-size: 0.82rem; color: var(--slate); text-align: left; border-left: 3px solid var(--slate); }
+
+    /* FORM */
+    .candidate-form { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .form-group input { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; font-family: var(--sans); font-size: 0.9rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: var(--slate); box-shadow: 0 0 0 3px var(--slate-dim); }
+    .form-group input::placeholder { color: var(--text-faint); }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 2rem; }
+    .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .progress-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+    .progress-count { font-family: var(--serif); font-size: 1.1rem; color: var(--slate); font-weight: 300; }
+    .progress-track { height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--slate), var(--slate-light)); border-radius: 3px; transition: width 0.5s ease; }
+
+    /* QUESTION */
+    .question-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); animation: slideIn 0.35s ease; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .q-section { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.4rem; font-weight: 500; }
+    .q-topic { font-size: 0.78rem; color: var(--text-faint); margin-bottom: 1.25rem; font-style: italic; }
+    .q-text { font-family: var(--serif); font-size: 1.25rem; font-weight: 300; color: var(--navy); line-height: 1.5; margin-bottom: 2rem; }
+    .q-note { font-size: 0.78rem; color: var(--text-faint); font-style: italic; margin-top: 1rem; padding: 0.75rem 1rem; background: var(--bg-2); border-radius: var(--radius); border-left: 2px solid var(--border-slate); }
+
+    /* SCALE */
+    .scale-wrap { display: flex; flex-direction: column; gap: 0.75rem; }
+    .scale-labels { display: flex; justify-content: space-between; }
+    .scale-labels span { font-size: 0.72rem; color: var(--text-faint); max-width: 42%; line-height: 1.4; font-style: italic; }
+    .scale-labels span:last-child { text-align: right; }
+    .scale-buttons { display: flex; gap: 0.6rem; }
+    .scale-btn {
+      flex: 1; aspect-ratio: 1; background: var(--bg-2);
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      cursor: pointer; font-family: var(--serif); font-size: 1.1rem;
+      color: var(--text-muted); transition: all 0.18s ease; font-weight: 300;
+    }
+    .scale-btn:hover { border-color: var(--slate); color: var(--slate); background: var(--slate-dim); box-shadow: 0 2px 8px rgba(74,111,165,0.1); }
+    .scale-btn.selected { background: var(--slate); border-color: var(--slate); color: #fff; box-shadow: 0 4px 14px rgba(74,111,165,0.2); }
+
+    /* BUTTONS */
+    .q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.85rem 1.8rem; border-radius: 6px; border: 1.5px solid transparent; cursor: pointer; transition: all 0.2s; }
+    .btn-primary { background: var(--slate); color: #fff; border-color: var(--slate); box-shadow: 0 4px 14px rgba(74,111,165,0.18); }
+    .btn-primary:hover { background: var(--slate-light); border-color: var(--slate-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74,111,165,0.22); }
+    .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border-color: var(--border); }
+    .btn-ghost:hover { border-color: var(--slate); color: var(--slate); background: var(--slate-dim); }
+
+    /* LOADING */
+    .loading-screen { text-align: center; padding: 4rem 2rem; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .loading-spinner { width: 44px; height: 44px; margin: 0 auto 2rem; border: 3px solid var(--border); border-top-color: var(--slate); border-radius: 50%; animation: spin 0.9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--navy); margin-bottom: 0.5rem; }
+    .loading-sub { font-size: 0.85rem; color: var(--text-muted); }
+    .loading-steps { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .loading-step { font-size: 0.78rem; color: var(--text-faint); padding: 0.4rem 0.75rem; border-radius: 6px; transition: all 0.3s; }
+    .loading-step.active { color: var(--slate); background: var(--slate-dim); font-weight: 500; }
+
+    /* RESULTS */
+    .results { animation: slideIn 0.5s ease; }
+    .results-header { text-align: center; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .results-eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--slate-dim); padding: 0.35rem 1rem; border-radius: 6px; }
+    .results-name { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 300; color: var(--navy); margin-bottom: 0.25rem; }
+    .results-animal { font-family: var(--serif); font-size: 1.25rem; font-style: italic; color: var(--slate); }
+
+    .results-block { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-sm); }
+    .results-block-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); font-weight: 500; }
+    .results-body { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; }
+    .results-body p { margin-bottom: 1rem; }
+    .results-body p:last-child { margin-bottom: 0; }
+
+    .match-row { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+    .match-row:last-child { border-bottom: none; }
+    .match-rank { font-family: var(--serif); font-size: 0.9rem; color: var(--text-faint); width: 20px; flex-shrink: 0; }
+    .match-animal { font-weight: 500; font-size: 0.9rem; color: var(--text); flex: 1; }
+    .match-cluster { font-size: 0.72rem; color: var(--text-faint); flex: 1; }
+    .match-bar-wrap { flex: 1; }
+    .match-bar { height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .match-bar-fill { height: 100%; border-radius: 4px; background: var(--border); }
+    .match-pct { font-family: var(--serif); font-size: 0.95rem; color: var(--text-muted); width: 38px; text-align: right; flex-shrink: 0; }
+    .match-row.primary .match-animal { color: var(--navy); font-size: 1rem; }
+    .match-row.primary .match-bar-fill { background: linear-gradient(90deg, var(--slate), var(--slate-light)); }
+    .match-row.primary .match-pct { color: var(--slate); font-size: 1.1rem; }
+    .match-row.secondary .match-bar-fill { background: var(--navy-mid); }
+    .match-row.secondary .match-pct { color: var(--navy); }
+
+    .trait-row { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+    .trait-row:last-child { border-bottom: none; }
+    .trait-name { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+    .trait-note { font-size: 0.75rem; color: var(--text-faint); margin-top: 0.15rem; }
+    .trait-score { font-family: var(--serif); font-size: 1.3rem; color: var(--slate); font-weight: 300; text-align: right; }
+
+    .results-cta { text-align: center; padding: 2.5rem 2rem; background: var(--navy); border-radius: var(--radius); margin-top: 1.5rem; }
+    .results-cta h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: #fff; margin-bottom: 0.5rem; }
+    .results-cta p { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-bottom: 1.5rem; }
+    .results-cta .btn-primary { background: var(--slate); border-color: var(--slate); }
+    .results-cta .btn-primary:hover { background: var(--slate-light); border-color: var(--slate-light); }
+
+    .error-box { background: rgba(220,38,38,0.05); border: 1px solid rgba(220,38,38,0.2); border-radius: var(--radius); padding: 1.25rem 1.5rem; color: #991B1B; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .hidden { display: none !important; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .scale-buttons { gap: 0.3rem; }
+      .q-text { font-size: 1.1rem; }
+      .match-cluster { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="logo">HireDepth<span class="logo-dot">.</span></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="page">
+    <div class="intro" id="intro-section">
+      <div class="intro-eyebrow">Professional Style Assessment</div>
+      <h1>Understand how you work <em>best</em>.</h1>
+      <p>10 questions. 8 minutes. A clear picture of your professional style — and the environments where you're most likely to thrive.</p>
+      <div class="intro-note">There are no right or wrong answers. The more honestly you respond, the more useful this will be — for you and for any organization you're being considered by.</div>
+    </div>
+
+    <div class="candidate-form" id="candidate-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your first name</label>
+          <input type="text" id="field-name" placeholder="e.g. Sarah" autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <label>Role you're applying for</label>
+          <input type="text" id="field-role" placeholder="e.g. Operations Manager" />
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Your email (optional)</label>
+          <input type="email" id="field-email" placeholder="your@email.com" autocomplete="email" />
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;text-align:right;">
+        <button class="btn btn-primary" onclick="startAssessment()">Start Assessment →</button>
+      </div>
+    </div>
+
+    <div id="assessment-section" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <span class="progress-label">Progress</span>
+          <span class="progress-count" id="progress-count">1 / 10</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:10%"></div></div>
+      </div>
+      <div id="question-container"></div>
+      <div class="q-nav">
+        <button class="btn btn-ghost" id="prev-btn" onclick="prevQuestion()">← Previous</button>
+        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div id="loading-section" class="hidden">
+      <div class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-title">Scoring your profile…</div>
+        <div class="loading-sub">Running your responses against 50 behavioral archetypes</div>
+        <div class="loading-steps">
+          <div class="loading-step active" id="step-1">Building your trait vector</div>
+          <div class="loading-step" id="step-2">Computing distance to all 50 animals</div>
+          <div class="loading-step" id="step-3">Identifying your primary archetype</div>
+          <div class="loading-step" id="step-4">Generating your profile summary</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="results-section" class="hidden"></div>
+  </div>
+
+  <script>
+  const QUESTIONS = [
+    {section:"Presence and influence",topic:"How you show up in professional spaces",text:"When you enter a professional setting — a meeting, a new team, a conversation with senior stakeholders — how do you naturally show up?",low:"I observe and listen before contributing. I work effectively from the background.",high:"I naturally draw attention. I am usually one of the most visible voices in any professional setting.",note:"This shapes how you navigate stakeholder relationships, manage up, and build visibility in organizations."},
+    {section:"Assertiveness and conflict mode",topic:"How you respond when priorities clash",text:"When your priorities, ideas, or decisions conflict with a colleague's, a manager's, or a vendor's — what happens naturally?",low:"I find common ground quickly. Preserving the relationship matters more than winning the point.",high:"I advocate firmly and play to win. I find friction energizing and expect others to push back.",note:"This predicts how you handle negotiation, give difficult feedback, and perform in competitive environments."},
+    {section:"Social energy at work",topic:"What fuels your best professional performance",text:"When you think about what fuels your best professional performance, where does your energy come from?",low:"Working alone, deep focus, minimal interruption. I do my best thinking in quiet.",high:"Constant collaboration, shared context, team energy. I think better with people around me.",note:"This affects your fit with different team structures, meeting cultures, and open vs. focused environments."},
+    {section:"Professional self-presentation",topic:"How consciously you manage how you come across",text:"How consciously do you manage the way you come across professionally — your presence, communication style, and how you are perceived?",low:"Pure substance. I don't think about how I'm perceived. I let my work speak for itself.",high:"My presence and personal brand are deliberate professional tools I actively manage.",note:"This drives client-facing effectiveness, executive presence, and influence where visibility matters."},
+    {section:"Approach to problems",topic:"How you tackle professional challenges",text:"When you face a difficult professional challenge — something without an obvious answer — where do you naturally start?",low:"I look for the proven path first. Precedent exists for a reason and I prefer to build on what works.",high:"I look for what hasn't been tried. Novelty energizes me and I'd rather invent a new path than follow an old one.",note:"This maps to your innovation appetite, comfort with ambiguity, and fit with roles requiring original thinking."},
+    {section:"Team and collective orientation",topic:"Your relationship to the success of people around you",text:"What is your honest relationship to the success of the people around you at work?",low:"I track my own output and growth. I support my colleagues but my primary accountability is to my own results.",high:"My team's outcome is my outcome. I'll sacrifice personal credit and my own output if it makes the group stronger.",note:"This predicts mentorship behavior, credit-sharing, and how you perform under shared accountability structures."},
+    {section:"Cognitive style",topic:"How you think through complex problems",text:"When you're working through something complex — a difficult decision, an ambiguous problem — what is your natural mode?",low:"Fast pattern recognition. I trust my instincts, move quickly, and correct in motion.",high:"Deep analysis, second-order thinking. I catch what others miss, but I can sometimes overthink.",note:"This affects your decision quality, research depth, and fit with roles requiring speed vs. analytical precision."},
+    {section:"Work tempo and energy",topic:"How you approach volume and pace",text:"How do you naturally approach the volume and pace of work?",low:"Sustainable and deliberate. I protect quality and personal boundaries. I don't celebrate overwork.",high:"High-intensity default. I'm most alive when I'm at capacity. Pressure energizes rather than depletes me.",note:"This predicts your performance under deadline pressure and fit in high-velocity vs. deliberate organizations."},
+    {section:"Adaptability and appetite for change",topic:"How you relate to novelty and new environments",text:"How do you relate to change, novelty, and unfamiliar professional environments?",low:"I do my best work in known terrain. Stability and familiarity have real productivity value for me.",high:"I actively seek novelty. Familiar contexts drain me — change and new environments bring out my best.",note:"This predicts your resilience during organizational change and performance in scaling environments."},
+    {section:"Decision style under pressure",topic:"How you act when time is short and information is incomplete",text:"When a decision needs to be made under time pressure and you don't have all the information you'd like — what do you do?",low:"I wait for more signal. Acting without adequate context creates more problems than it solves. I'd rather be right than fast.",high:"I act immediately on pattern recognition. Momentum beats perfect information. I decide fast and correct in motion.",note:"This maps to crisis performance, agile execution, and leadership style when stakes are high and time is short."}
+  ];
+
+  let currentQ=0, answers=new Array(10).fill(null);
+  let candidateName='', candidateRole='', candidateEmail='';
+
+  function startAssessment(){
+    candidateName=document.getElementById('field-name').value.trim()||'You';
+    candidateRole=document.getElementById('field-role').value.trim()||'the role';
+    candidateEmail=document.getElementById('field-email').value.trim();
+    document.getElementById('intro-section').classList.add('hidden');
+    document.getElementById('candidate-form').classList.add('hidden');
+    document.getElementById('assessment-section').classList.remove('hidden');
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    const q=QUESTIONS[currentQ];
+    document.getElementById('question-container').innerHTML=`
+      <div class="question-card">
+        <div class="q-section">${q.section}</div>
+        <div class="q-topic">${q.topic}</div>
+        <div class="q-text">${q.text}</div>
+        <div class="scale-wrap">
+          <div class="scale-labels"><span>${q.low}</span><span>${q.high}</span></div>
+          <div class="scale-buttons">
+            ${[1,2,3,4,5].map(n=>`<button class="scale-btn ${answers[currentQ]===n?'selected':''}" onclick="selectAnswer(${n})">${n}</button>`).join('')}
+          </div>
+        </div>
+        <div class="q-note">${q.note}</div>
+      </div>`;
+    document.getElementById('progress-fill').style.width=((currentQ+1)/10*100)+'%';
+    document.getElementById('progress-count').textContent=(currentQ+1)+' / 10';
+    document.getElementById('prev-btn').style.visibility=currentQ===0?'hidden':'visible';
+    const nb=document.getElementById('next-btn');
+    nb.disabled=answers[currentQ]===null;
+    nb.textContent=currentQ===9?'Submit Assessment →':'Next →';
+  }
+
+  function selectAnswer(val){answers[currentQ]=val;renderQuestion();}
+  function prevQuestion(){if(currentQ>0){currentQ--;renderQuestion();}}
+  function nextQuestion(){
+    if(answers[currentQ]===null)return;
+    if(currentQ<9){currentQ++;renderQuestion();}
+    else submitAssessment();
+  }
+
+  function submitAssessment(){
+    document.getElementById('assessment-section').classList.add('hidden');
+    document.getElementById('loading-section').classList.remove('hidden');
+    const steps=['step-1','step-2','step-3','step-4'];
+    let si=0;
+    const iv=setInterval(()=>{
+      if(si>0)document.getElementById(steps[si-1]).classList.remove('active');
+      if(si<steps.length){document.getElementById(steps[si]).classList.add('active');si++;}
+    },650);
+    // Scored right here in the page — instant, no server, no API key needed.
+    setTimeout(()=>{
+      clearInterval(iv);
+      try{showResults(computeResults());}
+      catch(e){showError(e.message);}
+    },2500);
+  }
+
+  // ===== In-page scoring engine (no server, no API key) =====
+  const WEIGHTS=[1.0,1.2,1.3,0.8,1.0,1.2,1.0,1.1,1.1,1.0];
+  const ANIMALS=[
+    ["Lion","Apex Leaders",[5,5,3,5,2,4,3,5,3,4]],["Tiger","Apex Leaders",[5,5,1,4,3,1,3,5,3,5]],
+    ["Leopard","Solo Predators",[4,4,1,4,4,1,4,4,4,4]],["Wolf","Pack Predators",[4,4,2,3,3,2,3,4,3,4]],
+    ["Grizzly","Apex Leaders",[5,4,2,4,2,2,3,3,2,3]],["Crocodile","Ambush Predators",[4,5,1,2,2,1,4,2,1,5]],
+    ["Wolverine","Solo Predators",[4,5,1,3,3,1,3,5,3,5]],["Elephant","Steady Powerhouses",[4,3,5,5,3,5,5,2,3,2]],
+    ["Gorilla","Steady Powerhouses",[5,4,4,5,2,4,4,3,2,3]],["Horse","Team Drivers",[3,3,4,4,2,4,2,5,3,3]],
+    ["Moose","Steady Powerhouses",[4,3,2,4,2,3,2,3,2,3]],["Bison","Team Drivers",[4,4,4,4,1,4,2,4,2,3]],
+    ["WildBoar","Ambush Predators",[4,5,3,3,2,2,2,4,2,5]],["MuskOx","Team Guardians",[3,3,4,3,1,5,2,3,1,2]],
+    ["Fox","Strategists",[3,3,2,4,5,2,4,4,5,4]],["Cheetah","Agile Hunters",[3,4,1,3,3,1,3,5,4,5]],
+    ["Weasel","Agile Hunters",[3,4,1,2,4,1,4,5,5,5]],["Hyena","Pack Operators",[3,4,4,3,3,3,3,4,4,4]],
+    ["Coyote","Strategists",[3,3,3,3,5,2,3,4,5,5]],["Mongoose","Agile Hunters",[3,4,2,3,4,2,4,5,4,5]],
+    ["Meerkat","Team Guardians",[2,3,5,3,3,5,3,4,3,3]],["Baboon","Pack Operators",[4,4,5,4,3,3,3,4,4,4]],
+    ["Otter","Social Connectors",[2,2,5,3,4,4,3,3,4,3]],["Eagle","Visionaries",[4,4,1,4,4,2,4,4,4,4]],
+    ["Owl","Deep Thinkers",[3,2,1,3,3,1,5,2,2,1]],["Hawk","Agile Hunters",[4,4,1,3,3,1,3,5,3,5]],
+    ["Falcon","Agile Hunters",[3,4,1,3,3,1,4,5,3,5]],["Raven","Deep Thinkers",[3,3,2,3,5,2,5,3,5,3]],
+    ["Swan","Refined Presence",[3,2,3,5,3,3,3,2,2,2]],["Dolphin","Social Connectors",[3,2,5,4,4,5,4,4,4,3]],
+    ["Dog","Team Guardians",[2,2,5,3,2,5,2,4,3,3]],["Parrot","Social Connectors",[2,3,5,5,4,4,3,3,4,3]],
+    ["Monkey","Social Connectors",[3,3,5,4,5,4,4,5,5,4]],["Deer","Gentle Steadies",[1,1,3,2,2,3,2,3,3,2]],
+    ["Rabbit","Gentle Steadies",[1,1,3,2,2,3,2,4,2,4]],["Sheep","Team Guardians",[1,1,5,1,1,5,1,2,1,2]],
+    ["BrownBear","Gentle Steadies",[3,3,2,3,2,2,3,3,2,2]],["Beaver","Steady Builders",[2,2,3,2,3,3,3,4,2,2]],
+    ["Ox","Steady Builders",[2,2,3,2,1,4,2,3,1,2]],["Camel","Steady Builders",[3,2,1,2,2,1,3,3,3,2]],
+    ["Tortoise","Gentle Steadies",[2,1,1,2,2,1,3,1,1,1]],["Donkey","Steady Builders",[2,2,2,1,2,2,2,3,1,2]],
+    ["Panda","Gentle Steadies",[2,1,2,3,2,2,3,1,1,1]],["Koala","Gentle Steadies",[1,1,1,2,1,1,2,1,1,1]],
+    ["BaldEagle","Visionaries",[4,3,1,5,3,2,4,3,2,2]],["Cat","Independent Observers",[3,2,2,4,4,1,4,3,3,3]],
+    ["Bat","Deep Thinkers",[2,2,3,1,3,3,4,4,4,3]],["PrairieDog","Team Guardians",[2,2,5,2,2,5,3,3,2,3]],
+    ["Penguin","Team Guardians",[2,2,4,3,2,4,3,3,2,2]],["Flamingo","Refined Presence",[2,1,4,5,2,4,2,2,2,2]],
+    ["Peacock","Refined Presence",[3,3,3,5,3,2,2,3,2,3]],["Porcupine","Independent Observers",[2,3,1,2,2,1,3,2,1,2]]
+  ];
+  const TRAIT_NAMES=["Presence","Assertiveness","Social energy","Self-presentation","Creative orientation","Team orientation","Cognitive depth","Work tempo","Adaptability","Decision style"];
+  const DIM=[
+    {low:"Works effectively from the background; lets results speak rather than seeking the spotlight.",mid:"Comfortable being visible when it matters, without needing to dominate a room.",high:"Naturally commands attention and is often one of the most visible voices in the room."},
+    {low:"Prioritizes harmony and common ground; prefers to defuse friction rather than escalate it.",mid:"Will hold a position when it counts, while staying open to compromise.",high:"Advocates firmly and is energized by healthy conflict; comfortable pushing back."},
+    {low:"Recharges through focused, independent work and quiet concentration.",mid:"Balances collaboration and solo focus depending on the task.",high:"Draws energy from collaboration and thinks best with people around."},
+    {low:"Lets the work speak; pays little attention to managing perception.",mid:"Aware of how they come across, without over-managing it.",high:"Treats presence and personal brand as deliberate professional tools."},
+    {low:"Trusts proven approaches and builds on what already works.",mid:"Blends established methods with new ideas as the situation calls for.",high:"Drawn to novelty; prefers inventing a new path over following an old one."},
+    {low:"Accountable first to their own output and growth.",mid:"Supports the team while keeping sight of individual goals.",high:"Treats the team's outcome as their own and readily shares credit."},
+    {low:"Moves fast on pattern recognition and instinct, correcting in motion.",mid:"Balances quick judgment with deeper analysis when the stakes rise.",high:"Thinks in depth and second-order effects; catches what others miss."},
+    {low:"Works at a sustainable, deliberate pace and protects quality and boundaries.",mid:"Adjusts intensity to the moment without burning out.",high:"Runs at high intensity and is energized by being at capacity."},
+    {low:"Does their best work in familiar, stable terrain.",mid:"Handles change well without actively seeking it.",high:"Actively seeks novelty and thrives amid change and new environments."},
+    {low:"Prefers to gather more signal before acting; values being right over being fast.",mid:"Weighs speed and certainty case by case.",high:"Decides fast on available signal and adjusts as new information arrives."}
+  ];
+  const DEVNOTES=[
+    {high:"Because you naturally command attention, make room for quieter voices so strong ideas from others still surface.",low:"Because you tend to work from the background, be intentional about making your contributions visible."},
+    {high:"Your directness is a strength — just watch that it doesn't read as combative to more conflict-averse colleagues.",low:"Your instinct for harmony is valuable, but don't let it stop you from advocating for the right call."},
+    {high:"You thrive around people; guard some focus time for the deep work that needs it.",low:"Your focus is an asset — be deliberate about staying connected to the wider team."},
+    {high:"You manage perception well; make sure substance always keeps pace with presentation.",low:"Your substance-first approach earns trust; a little attention to visibility helps others see it."},
+    {high:"Your appetite for novelty drives innovation; pair it with follow-through so ideas actually land.",low:"Your reliability is valuable; stay open to unproven approaches when they're genuinely warranted."},
+    {high:"Your team-first instinct builds trust; make sure your own contributions still get recognized.",low:"Your ownership drives results; investing in others' success will multiply your impact."},
+    {high:"Your depth catches what others miss; watch for over-analysis when a fast call would do.",low:"Your speed is an asset; slow down for the decisions that reward deeper analysis."},
+    {high:"You're at your best at full capacity; protect against burnout so the pace stays sustainable.",low:"Your steady pace protects quality; you can lean into higher intensity when the moment demands."},
+    {high:"You're energized by change; anchor yourself with enough structure to turn novelty into results.",low:"You do well in stable terrain; building comfort with change widens where you can thrive."},
+    {high:"You decide fast and adjust — just be sure the highest-stakes calls still get a second look.",low:"Your deliberate decisions are sound; practice acting sooner when speed matters more than certainty."}
+  ];
+  const ADJ=[["Understated","Commanding"],["Diplomatic","Assertive"],["Focused","Connected"],["Grounded","Polished"],["Steady","Inventive"],["Self-driven","Team-minded"],["Instinctive","Analytical"],["Measured","High-octane"],["Anchored","Adaptive"],["Deliberate","Decisive"]];
+
+  function band(s){return s<=2?'low':(s>=4?'high':'mid');}
+
+  function computeResults(){
+    const a=answers.map(x=>x||3);
+    const scored=ANIMALS.map(([name,cluster,vec])=>{
+      let s=0;
+      for(let i=0;i<10;i++){const d=a[i]-vec[i];s+=WEIGHTS[i]*d*d;}
+      const dist=Math.sqrt(s);
+      const match=Math.max(1,Math.min(99,Math.round((1-dist/13.5)*100)));
+      return {display:name.replace(/([a-z])([A-Z])/g,'$1 $2'),cluster,match};
+    }).sort((x,y)=>y.match-x.match);
+
+    const top10=scored.slice(0,10).map((o,i)=>({rank:i+1,animal:o.display,cluster:o.cluster,match:o.match}));
+    const primary=scored[0], secondary=scored[1];
+    const traits=TRAIT_NAMES.map((nm,i)=>({name:nm,score:a[i],note:DIM[i][band(a[i])]}));
+    const pick=(i,lo,mi,hi)=>band(a[i])==='low'?lo:(band(a[i])==='high'?hi:mi);
+
+    const style=
+      "You show up as someone who "+pick(0,"is comfortable working out of the spotlight","steps forward when it matters without crowding the room","naturally takes up space and helps shape the conversation")+". "+
+      "When priorities clash, you "+pick(1,"look for common ground and protect the relationship","hold your position while staying open to compromise","advocate firmly and treat friction as productive")+". "+
+      "Faced with a hard call under pressure, you "+pick(9,"prefer to gather more signal before committing","weigh speed against certainty case by case","trust your read and move quickly, correcting as you go")+", "+pick(6,"leaning on fast pattern recognition","balancing instinct with a second look","backed by a habit of thinking through second-order effects")+".";
+
+    const bestEnvironments=
+      "You do your best work in settings that "+pick(2,"give you room for deep, uninterrupted focus","balance collaboration with focus time","are collaborative and full of shared energy")+", "+pick(5,"and hold you accountable for your own results","with a healthy mix of individual and shared goals","where group success is valued over individual credit")+". "+
+      "You're most effective at "+pick(7,"a sustainable, deliberate pace that protects quality","a pace you can modulate to the moment","a fast, high-intensity pace")+", in environments with "+pick(8,"stability and familiar terrain","a manageable amount of change","plenty of novelty and change")+".";
+
+    let mi=0,mv=-1;
+    for(let i=0;i<10;i++){const d=Math.abs(a[i]-3);if(d>mv){mv=d;mi=i;}}
+    const selfAwareness = mv===0
+      ? "Your profile sits in a balanced middle across the board — a versatile starting point that adapts well to a range of roles and teams."
+      : DEVNOTES[mi][a[mi]>=4?'high':'low'];
+
+    const adj = mv===0 ? "Balanced" : ADJ[mi][a[mi]>=4?1:0];
+    const hybridLabel = adj+" "+primary.display;
+    const profileType = (primary.match-secondary.match)>=6 ? "Strong primary profile" : "Blended profile with a close secondary";
+
+    return {primaryAnimal:primary.display,primaryMatch:primary.match,secondaryAnimal:secondary.display,secondaryMatch:secondary.match,profileType,hybridLabel,top10,traits,summary:{style,bestEnvironments,selfAwareness}};
+  }
+
+  function showResults(data){
+    document.getElementById('loading-section').classList.add('hidden');
+    const c=document.getElementById('results-section');
+    c.classList.remove('hidden');
+    c.innerHTML=`
+      <div class="results">
+        <div class="results-header">
+          <div class="results-eyebrow">Your Profile · ${candidateRole}</div>
+          <div class="results-name">${candidateName}</div>
+          <div class="results-animal">${data.hybridLabel||data.primaryAnimal}</div>
+        </div>
+        <div class="results-block">
+          <div class="results-block-title">Your professional style</div>
+          <div class="results-body"><p>${data.summary.style}</p></div>
+        </div>
+        <div class="results-block">
+          <div class="results-block-title">Where you do your best work</div>
+          <div class="results-body"><p>${data.summary.bestEnvironments}</p></div>
+        </div>
+        <div class="results-block">
+          <div class="results-block-title">Things worth knowing about yourself</div>
+          <div class="results-body"><p>${data.summary.selfAwareness}</p></div>
+        </div>
+        <div class="results-block">
+          <div class="results-block-title">Animal match ranking — top 10</div>
+          ${data.top10.map((item,i)=>`
+            <div class="match-row ${i===0?'primary':i===1?'secondary':''}">
+              <div class="match-rank">${item.rank}</div>
+              <div class="match-animal">${item.animal}</div>
+              <div class="match-cluster">${item.cluster}</div>
+              <div class="match-bar-wrap"><div class="match-bar"><div class="match-bar-fill" style="width:${item.match}%"></div></div></div>
+              <div class="match-pct">${item.match}%</div>
+            </div>`).join('')}
+        </div>
+        <div class="results-block">
+          <div class="results-block-title">Trait profile · 1 = low end · 5 = high end</div>
+          ${data.traits.map(t=>`
+            <div class="trait-row">
+              <div><div class="trait-name">${t.name}</div><div class="trait-note">${t.note}</div></div>
+              <div class="trait-score">${t.score}</div>
+            </div>`).join('')}
+        </div>
+        <div class="results-cta">
+          <h3>This profile is a starting point, not a verdict.</h3>
+          <p>Your results have been shared with the hiring team. You'll receive a copy of this summary regardless of the outcome.</p>
+          <a href="index.html" class="btn btn-primary">Learn more about HireDepth →</a>
+        </div>
+      </div>`;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function showError(msg){
+    document.getElementById('loading-section').classList.add('hidden');
+    const c=document.getElementById('results-section');
+    c.classList.remove('hidden');
+    c.innerHTML=`<div class="error-box"><strong>Something went wrong.</strong><br/>${msg}</div><button class="btn btn-ghost" onclick="location.reload()">← Try again</button>`;
+  }
+  </script>
+</body>
+</html>

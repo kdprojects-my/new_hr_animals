@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HireDepth — Hire for Who They Are</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">HireDepth<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#workflow">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#candidates">For Candidates</a></li>
+      </ul>
+      <a href="assessment.html" class="btn btn-nav btn-nav-assess">Take Assessment</a>
+      <a href="#cta" class="btn btn-nav">Book a Demo</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#workflow">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#candidates">For Candidates</a></li>
+      <li><a href="assessment.html" class="btn btn-nav btn-nav-assess">Take Assessment</a>
+      <a href="#cta" class="btn btn-nav">Book a Demo</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-accent-ring"></div>
+    <div class="hero-blob"></div>
+    <div class="container">
+      <div class="hero-eyebrow reveal">AI-Powered Culture Intelligence</div>
+      <h1 class="hero-headline reveal reveal-delay-1">
+        Hire for <em>who they are</em>,<br/>not just what they've done.
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        HireDepth layers culture alignment and personality profiling on top of AI resume screening — so your shortlist reflects not just credentials, but fit.
+      </p>
+      <div class="hero-cta reveal reveal-delay-3">
+        <a href="assessment.html" class="btn btn-primary">Take the Assessment →</a>
+        <a href="#workflow" class="btn btn-ghost">See How It Works →</a>
+      </div>
+      <div class="hero-stat-bar reveal reveal-delay-4">
+        <div class="stat">
+          <span class="stat-num">73%</span>
+          <span class="stat-label">Reduction in mis-hires</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">4×</span>
+          <span class="stat-label">Faster shortlisting</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">91%</span>
+          <span class="stat-label">Manager satisfaction with hires</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container">
+      <p class="trust-label">Trusted by People Ops teams at</p>
+      <div class="logos">
+        <div class="logo-placeholder">Meridian Health</div>
+        <div class="logo-placeholder">Vantage Group</div>
+        <div class="logo-placeholder">Arclight Studios</div>
+        <div class="logo-placeholder">Fortem Capital</div>
+        <div class="logo-placeholder">NorthBridge Co.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM SECTION -->
+  <section class="problem section-pad" id="problem">
+    <div class="container">
+      <div class="section-label reveal">The Gap</div>
+      <div class="problem-grid">
+        <div class="problem-left reveal">
+          <h2 class="section-headline">
+            Why culture fit<br/>gets <em>overlooked</em>.
+          </h2>
+        </div>
+        <div class="problem-right reveal reveal-delay-1">
+          <p class="problem-lead">
+            Most hiring tools stop at the resume. They tell you what a candidate has done — but say nothing about whether they'll thrive in your environment.
+          </p>
+          <div class="problem-points">
+            <div class="problem-point">
+              <div class="point-icon">①</div>
+              <div>
+                <strong>Credentials don't predict retention.</strong>
+                <p>The #1 cause of early turnover isn't skill gaps — it's culture misalignment. Yet most ATS systems ignore it entirely.</p>
+              </div>
+            </div>
+            <div class="problem-point">
+              <div class="point-icon">②</div>
+              <div>
+                <strong>Gut instinct isn't scalable.</strong>
+                <p>Hiring managers sense fit in interviews — but by then you've already spent weeks narrowing a 400-applicant pool the wrong way.</p>
+              </div>
+            </div>
+            <div class="problem-point">
+              <div class="point-icon">③</div>
+              <div>
+                <strong>Personality tests feel like homework.</strong>
+                <p>Long-form assessments kill candidate experience and completion rates. There's a better way to gather the same signal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW SECTION -->
+  <section class="workflow section-pad" style="" id="workflow">
+    <div class="container">
+      <div class="section-label reveal">The Process</div>
+      <h2 class="section-headline centered reveal">
+        Four layers. One ranked shortlist.
+      </h2>
+      <p class="section-sub centered reveal reveal-delay-1">
+        HireDepth's pipeline runs automatically — from raw applications to a prioritized, scored candidate list.
+      </p>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="4" width="22" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="18" x2="15" y2="18" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Resume Scan</h3>
+          <p>AI parses every application — credentials, skills, job history, tenure patterns, and role relevance — in seconds.</p>
+          <div class="step-line"></div>
+        </div>
+
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M14 4C14 4 8 9 8 14s6 10 6 10" stroke="currentColor" stroke-width="1.5"/><path d="M14 4c0 0 6 5 6 10s-6 10-6 10" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="14" x2="24" y2="14" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Culture Match</h3>
+          <p>You define your workplace culture type — collaborative, innovative, hierarchical, or results-driven — using our SHRM-aligned profiling framework.</p>
+          <div class="step-line"></div>
+        </div>
+
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3C9 3 5 7 5 12c0 3.5 2 6.5 5 8v4h8v-4c3-1.5 5-4.5 5-8 0-5-4-9-9-9z" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="24" x2="17" y2="24" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Personality Fit</h3>
+          <p>Candidates complete a lightweight 8-question animal archetype quiz. Results are mapped to behavioral traits required for each role.</p>
+          <div class="step-line"></div>
+        </div>
+
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M9 14l4 4 6-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Ranked Shortlist</h3>
+          <p>HR receives a prioritized candidate list with composite fit scores across resume, culture, and personality — ready for first-round interviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features section-pad" id="features">
+    <div class="container">
+      <div class="section-label reveal">Capabilities</div>
+      <h2 class="section-headline centered reveal">
+        Three engines. One decision.
+      </h2>
+      <div class="feature-cards">
+
+        <div class="feature-card reveal">
+          <div class="card-accent"></div>
+          <div class="card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="5" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="11" x2="23" y2="11" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="16" x2="23" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="21" x2="17" y2="21" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="5" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.5"/><path d="M22 24l1.5 1.5L26 22" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Resume AI</h3>
+          <p>Structured extraction of skills, experience depth, career trajectory, and role-specific signals — parsed from any resume format in under 3 seconds.</p>
+          <ul class="card-features">
+            <li>Multi-format parsing (PDF, DOCX, LinkedIn)</li>
+            <li>Skill taxonomy mapping</li>
+            <li>Tenure and stability scoring</li>
+          </ul>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-1 card-featured">
+          <div class="card-accent"></div>
+          <div class="card-tag">Core Differentiator</div>
+          <div class="card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M16 5C16 5 10 10 10 16s6 11 6 11" stroke="currentColor" stroke-width="1.5"/><path d="M16 5c0 0 6 5 6 11s-6 11-6 11" stroke="currentColor" stroke-width="1.5"/><line x1="5" y1="16" x2="27" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Culture Profiling</h3>
+          <p>Based on established frameworks from SHRM and Indeed, HireDepth profiles your organization's culture across four primary types — and scores every candidate against it.</p>
+          <ul class="card-features">
+            <li>4-quadrant culture typology</li>
+            <li>Team-level culture segmentation</li>
+            <li>Culture drift detection over time</li>
+          </ul>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="card-accent"></div>
+          <div class="card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4c-5 0-9 3.5-9 8 0 3 1.5 5.5 4 7v4.5h10V19c2.5-1.5 4-4 4-7 0-4.5-4-8-9-8z" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="28" x2="19" y2="28" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Personality Matching</h3>
+          <p>Inspired by animal archetype frameworks, our quiz maps candidates to behavioral profiles — wolf, dolphin, bear, eagle — and surfaces alignment with role requirements.</p>
+          <ul class="card-features">
+            <li>8-question micro-assessment</li>
+            <li>12 animal archetypes mapped</li>
+            <li>Role-archetype match matrix</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CANDIDATES SECTION -->
+  <section class="candidates section-pad" id="candidates">
+    <div class="container">
+      <div class="candidates-inner">
+        <div class="candidates-text reveal">
+          <div class="section-label">For Candidates</div>
+          <h2 class="section-headline">
+            Eight questions.<br/><em>Infinite clarity.</em>
+          </h2>
+          <p>
+            The animal personality quiz takes under four minutes and gives candidates a clear picture of how they show up at work — not a performance review, just a mirror.
+          </p>
+          <p>
+            No right or wrong answers. Candidates who answer honestly are matched to roles and cultures where they're most likely to thrive — which means less friction for everyone.
+          </p>
+          <a href="assessment.html" class="btn btn-ghost">Take the Assessment →</a>
+        </div>
+        <div class="animals-grid reveal reveal-delay-1">
+          <div class="animal-card">
+            <div class="animal-emoji">🐺</div>
+            <div class="animal-name">Wolf</div>
+            <div class="animal-trait">Independent · Strategic · Driven</div>
+          </div>
+          <div class="animal-card">
+            <div class="animal-emoji">🐬</div>
+            <div class="animal-name">Dolphin</div>
+            <div class="animal-trait">Collaborative · Empathetic · Communicative</div>
+          </div>
+          <div class="animal-card">
+            <div class="animal-emoji">🐻</div>
+            <div class="animal-name">Bear</div>
+            <div class="animal-trait">Steady · Dependable · Protective</div>
+          </div>
+          <div class="animal-card">
+            <div class="animal-emoji">🦅</div>
+            <div class="animal-name">Eagle</div>
+            <div class="animal-trait">Visionary · Precise · Decisive</div>
+          </div>
+          <div class="animal-card">
+            <div class="animal-emoji">🦊</div>
+            <div class="animal-name">Fox</div>
+            <div class="animal-trait">Adaptive · Creative · Quick</div>
+          </div>
+          <div class="animal-card">
+            <div class="animal-emoji">🦁</div>
+            <div class="animal-name">Lion</div>
+            <div class="animal-trait">Commanding · Confident · Bold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof section-pad">
+    <div class="container">
+      <div class="section-label reveal centered">Results</div>
+      <div class="proof-grid">
+        <div class="proof-card reveal">
+          <div class="quote-mark">"</div>
+          <p>"We cut first-year turnover by nearly half after rolling out HireDepth. Culture fit was always the thing we couldn't measure — now we can."</p>
+          <div class="quote-author">
+            <div class="author-avatar">SL</div>
+            <div>
+              <strong>Sarah L.</strong>
+              <span>VP People Ops, Meridian Health</span>
+            </div>
+          </div>
+        </div>
+        <div class="proof-card reveal reveal-delay-1">
+          <div class="quote-mark">"</div>
+          <p>"The animal quiz sounds quirky until you realize it's predicting interview performance better than anything we've tried in ten years."</p>
+          <div class="quote-author">
+            <div class="author-avatar">MT</div>
+            <div>
+              <strong>Marcus T.</strong>
+              <span>Talent Acquisition Lead, Vantage Group</span>
+            </div>
+          </div>
+        </div>
+        <div class="proof-card reveal reveal-delay-2">
+          <div class="quote-mark">"</div>
+          <p>"Our hiring managers finally trust the shortlist. They're not second-guessing the stack-rank because they understand the reasoning behind it."</p>
+          <div class="quote-author">
+            <div class="author-avatar">JK</div>
+            <div>
+              <strong>Jamie K.</strong>
+              <span>HR Director, Arclight Studios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section section-pad" id="cta">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="section-label centered">Get Started</div>
+        <h2 class="section-headline centered">
+          Ready to hire for<br/><em>who they really are?</em>
+        </h2>
+        <p class="cta-sub">
+          Join 200+ HR teams using HireDepth to build cultures that last. Early access is limited.
+        </p>
+        <form class="cta-form" id="cta-form">
+          <input type="email" placeholder="your.name@company.com" class="cta-input" required />
+          <button type="submit" class="btn btn-primary">Request Early Access</button>
+        </form>
+        <p class="cta-fine">No credit card required. We'll reach out within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#" class="logo">HireDepth<span class="logo-dot">.</span></a>
+          <p>Culture-first hiring intelligence<br/>for modern People Ops teams.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Integrations</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Changelog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">GDPR</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 HireDepth Inc. All rights reserved.</p>
+        <p>Built for HR teams who believe culture is strategy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Netlify config for the HireDepth site.
+# The whole folder is published as-is (no build step), and serverless
+# functions live in netlify/functions.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
