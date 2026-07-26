@@ -426,13 +426,16 @@ function recomputeFilter(){
 
 // ---- FIT ENGINE ----
 const MAXD=Math.sqrt(8)*100;
+function critLabel(arr,full){if(!arr||!arr.length)return '';
+ return full?arr.map(d=>DLAB[d]).join(', '):DLAB[arr[0]]+(arr.length>1?' +'+(arr.length-1):'');}
 function computeFit(ic){ // ic: array 8
  const arr=APP.companies.map((c,i)=>{
   let ss=0,critical=false,perdim=[];
   for(let k=0;k<8;k++){const g=c.s[k]-ic[k];ss+=g*g;const ag=Math.abs(g);
    perdim.push(ag);if(ag>40)critical=true;}
   const d=Math.sqrt(ss);const fit=Math.max(0,Math.min(100,Math.round(100*(1-d/165))));
-  return {i,d,fit,critical,perdim};});
+  const critDims=DIMS.map((dd,k)=>({dd,g:perdim[k]})).filter(o=>o.g>40).sort((a,b)=>b.g-a.g).map(o=>o.dd);
+  return {i,d,fit,critical,critDims,perdim};});
  arr.sort((a,b)=>a.d-b.d);
  fitRank={};arr.forEach((o,idx)=>fitRank[o.i]=idx);
  return arr;
@@ -451,7 +454,7 @@ function showCompany(i){selInd=null;document.querySelectorAll('.ind-card').forEa
  if(fitOrder){const f=fitOrder.find(o=>o.i===i);const ind=APP.individuals.find(x=>x.id===activeIndId);
    html+=`<div class="d-sec-title">Fit with ${ind.e} ${ind.n}</div>
    <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem"><span style="font-family:var(--serif);font-size:2rem;color:var(--navy)">${f.fit}</span>
-   <span style="font-size:.7rem;color:var(--text-faint)">/ 100 alignment${f.critical?' · <span class="crit-flag">critical mismatch</span>':''}</span></div>`;}
+   <span style="font-size:.7rem;color:var(--text-faint)">/ 100 alignment${f.critical?' · <span class="crit-flag">critical mismatch: '+critLabel(f.critDims,true)+'</span>':''}</span></div>`;}
  html+=`<div class="d-sec-title">Culture profile${ic?' vs candidate ideal (gold)':''}</div>`;
  DIMS.forEach((dim,k)=>{const v=c.s[k];const gap=ic?Math.abs(v-ic[k]):0;const crit=ic&&gap>40;
   html+=`<div class="dim-row"><div class="dim-top"><span>${DFULL[dim]}</span><span class="v">${Math.round(v)}</span></div>
@@ -488,8 +491,8 @@ function selectIndividual(id){
    <div class="align-legend"><span><i class="sw" style="background:var(--gold)"></i>ideal culture</span><span><i class="sw" style="background:var(--slate)"></i>company</span></div>`;
  top.forEach((o,idx)=>{const c=APP.companies[o.i];
   html+=`<div class="fit-row" data-ci="${o.i}"><div class="fit-rank">${idx+1}</div>
-   <div class="fit-main"><div class="fit-nm">${c.n}${o.critical?'<span class="crit-flag">mismatch</span>':''}</div>
-   <div class="fit-sub">${c.ap} · ${c.sec}</div></div>
+   <div class="fit-main"><div class="fit-nm">${c.n}</div>
+   <div class="fit-sub">${c.ap} · ${c.sec}${o.critical?' · <span class="crit-flag">mismatch: '+critLabel(o.critDims)+'</span>':''}</div></div>
    <div class="fit-bar"><div class="fit-bar-f" style="width:${o.fit}%"></div></div>
    <div class="fit-pct">${o.fit}</div></div>`;});
  html+=`<div class="d-sec-title" style="margin-top:1.1rem">Their ideal culture</div>`;
