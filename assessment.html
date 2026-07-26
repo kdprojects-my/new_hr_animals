@@ -368,7 +368,7 @@
       for(let i=0;i<10;i++){const d=a[i]-vec[i];s+=WEIGHTS[i]*d*d;}
       const dist=Math.sqrt(s);
       const match=Math.max(1,Math.min(99,Math.round((1-dist/13.5)*100)));
-      return {display:name.replace(/([a-z])([A-Z])/g,'$1 $2'),cluster,match};
+      return {display:name.replace(/([a-z])([A-Z])/g,'$1 $2'),cluster,match,id:name.toLowerCase()};
     }).sort((x,y)=>y.match-x.match);
 
     const top10=scored.slice(0,10).map((o,i)=>({rank:i+1,animal:o.display,cluster:o.cluster,match:o.match}));
@@ -395,7 +395,7 @@
     const hybridLabel = adj+" "+primary.display;
     const profileType = (primary.match-secondary.match)>=6 ? "Strong primary profile" : "Blended profile with a close secondary";
 
-    return {primaryAnimal:primary.display,primaryMatch:primary.match,secondaryAnimal:secondary.display,secondaryMatch:secondary.match,profileType,hybridLabel,top10,traits,summary:{style,bestEnvironments,selfAwareness}};
+    return {primaryAnimal:primary.display,primaryId:primary.id,primaryMatch:primary.match,secondaryAnimal:secondary.display,secondaryMatch:secondary.match,profileType,hybridLabel,top10,traits,summary:{style,bestEnvironments,selfAwareness}};
   }
 
   function showResults(data){
@@ -443,7 +443,8 @@
         <div class="results-cta">
           <h3>This profile is a starting point, not a verdict.</h3>
           <p>Your results have been shared with the hiring team. You'll receive a copy of this summary regardless of the outcome.</p>
-          <a href="index.html" class="btn btn-primary">Learn more about HireDepth →</a>
+          <a href="culturecube.html?candidate=${data.primaryId}" class="btn btn-primary">See where you fit on the Culture Cube →</a>
+          <a href="index.html" class="btn btn-ghost">Learn more about HireDepth →</a>
         </div>
       </div>`;
     window.scrollTo({top:0,behavior:'smooth'});

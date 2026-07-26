@@ -139,8 +139,9 @@ a{color:inherit;text-decoration:none}
     <span class="nav-tag">Culture Cube</span>
   </div>
   <div class="nav-links">
+    <a href="assessment.html">← Assessment</a>
     <a href="#" id="openAbout">Methodology</a>
-    <a href="https://kdprojects-my.github.io/new_hr_animals/" target="_blank">Individual Layer ↗</a>
+    <a href="index.html">Home</a>
   </div>
 </nav>
 
@@ -533,6 +534,11 @@ function openRightMobile(){if(innerWidth<=1080){document.getElementById('right')
 function setTab(t){document.querySelectorAll('.mobtabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
  document.getElementById('left').classList.toggle('open',t==='left');document.getElementById('right').classList.toggle('open',t==='right');}
 document.querySelectorAll('.mobtabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
+
+// ---- DEEP LINK: culturecube.html?candidate=cat -> auto-place from a finished assessment ----
+(function(){const q=new URLSearchParams(location.search).get('candidate');if(!q)return;
+ const m=APP.individuals.find(x=>x.id===q.toLowerCase()||x.n.toLowerCase()===q.toLowerCase());
+ if(m){selectIndividual(m.id);const card=document.querySelector('.ind-card[data-id="'+m.id+'"]');if(card)card.scrollIntoView({block:'nearest'});}})();
 
 // ---- START ----
 resize();updateCam();applyVisual();recomputeFilter();loop();
